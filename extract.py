@@ -1,21 +1,31 @@
-# Npz-extractor attempt by Artur Sahakyan
-
+import os
 import numpy as np
 import os
 
 current_dir = os.getcwd()
 
-def extract(filename):
+def extract(directory,filename):
 	compress = np.load(str(filename),allow_pickle=True)
 	#print(compress.files)
 	os.makedirs(str(filename)[:-4]) 
 	for file in compress.files:
 		print(file)
 		print(compress[str(file)])   
-		np.save(os.path.join(str(filename)[:-4],str(file)+'.npy'),compress[str(file)])
+		np.save(directory + '\\' + str(file)+'.npy',compress[str(file)])
 
+folders = os.listdir()
 
-for file in os.listdir():
-	if file.endswith('.npz'):
-		extract(file)
-		print(file)
+for folder in folders:
+	content = os.listdir(folder)
+	try:
+		if not folder.endswith('.py'):
+			#file_name = folder + ".npz"
+			for sub in content:
+				if sub.endswith(".npz"):
+					print(folder + "\\" + sub)
+					extract(folder,folder+"\\"+sub)
+	except:
+		print("Not a folder, but a python or other type of file occurred in loop")
+
+	#if content.endswith('.npz'):
+	#	print(content)
