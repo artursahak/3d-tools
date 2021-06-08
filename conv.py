@@ -1,8 +1,9 @@
+#### BY ARTASHES HARTENYAN
 import numpy as np
 import sys
 import os
 from stl import mesh
-
+#################### BY ARTASHES HARTENYAN #####################
 def fast_scandir(dirname):
     subfolders= [f.path for f in os.scandir(dirname) if f.is_dir()]
     for dirname in list(subfolders):
